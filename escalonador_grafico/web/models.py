@@ -6,12 +6,25 @@ class Dia(models.Model):
     def __str__(self):
         return self.nome
 
+
 class Professor(models.Model):
     nome = models.CharField(max_length=128)
-    dias_livres = models.ManyToManyField(Dia)
+    dias_livres = models.ManyToManyField(Dia, through='DiaEmProfessor')
 
     def __str__(self):
         return self.nome
+
+
+class DiaEmProfessor(models.Model):
+    professor = models.ForeignKey(Professor, on_delete=models.SET_NULL, null=True)
+    dia = models.ForeignKey(Dia, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        try:
+            return self.dia.nome
+        except AttributeError:
+            return self.dia
+
 
 class Disciplina(models.Model):
     nome = models.CharField(max_length=128)
@@ -27,15 +40,24 @@ class Periodo(models.Model):
         return self.nome
 
 
+class Grupo(models.Model):
+    nome = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.nome
+
+
 class Turma(models.Model):
     nome = models.CharField(max_length=128, null=True, blank=True)
     disciplina = models.ManyToManyField(Disciplina, through='DisciplinaEmTurma')
     periodo = models.ManyToManyField(Periodo, through='PeriodoEmTurma')
-    dia = models.CharField(max_length=128, blank=True, null=True)
+    dia = models.ForeignKey(Dia,on_delete=models.SET_NULL, null=True, blank=True)
     professor = models.ManyToManyField(Professor, through='ProfessorEmTurma')
+    grupo = models.ManyToManyField(Grupo, through='GrupoEmTurma', blank=True)
 
     def __str__(self):
         return self.nome
+
 
 class ProfessorEmTurma(models.Model):
     turma = models.ForeignKey(Turma, on_delete=models.SET_NULL, null=True)
@@ -43,9 +65,9 @@ class ProfessorEmTurma(models.Model):
 
     def __str__(self):
         try:
-            return self.turma.nome
+            return self.professor.nome
         except AttributeError:
-            return self.turma
+            return self.professor
 
 
 class DisciplinaEmTurma(models.Model):
@@ -54,9 +76,9 @@ class DisciplinaEmTurma(models.Model):
 
     def __str__(self):
         try:
-            return self.turma.nome
+            return self.disciplina.nome
         except AttributeError:
-            return self.turma
+            return self.disciplina
 
 
 class PeriodoEmTurma(models.Model):
@@ -65,6 +87,17 @@ class PeriodoEmTurma(models.Model):
 
     def __str__(self):
         try:
-            return self.turma.nome
+            return self.periodo.nome
         except AttributeError:
-            return self.turma
+            return self.periodo
+
+
+class GrupoEmTurma(models.Model):
+    turma = models.ForeignKey(Turma, on_delete=models.SET_NULL, null=True)
+    grupo = models.ForeignKey(Grupo, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        try:
+            return self.grupo.nome
+        except AttributeError:
+            return self.grupo

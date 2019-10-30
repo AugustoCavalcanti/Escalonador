@@ -2,9 +2,9 @@
 
 {% block object-tools %}
     <div>
-        <form action="" method="POST">
+        <form action="dia/" method="POST">
             {% csrf_token %}
-                <button type="submit">Atribuit Dia</button>
+            <input type="submit" name="apply" value="Atribuir Dia"/>
         </form>
     </div>
     {{ block.super }}
