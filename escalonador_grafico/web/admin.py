@@ -76,7 +76,8 @@ class TurmaAdmin(admin.ModelAdmin):
                     for dia in Dia.objects.filter(diaemprofessor__professor=professor):
                         disciplina = Disciplina.objects.filter(disciplinaemturma__turma=turma)[0]
                         periodo = Periodo.objects.filter(periodoemturma__turma=turma)[0]
-                        if len(Turma.objects.filter(professoremturma__professor=professor, dia=dia)) < 1 and len(Turma.objects.filter(disciplinaemturma__disciplina=disciplina, dia=dia)) < 1 and len(Turma.objects.filter(periodoemturma__periodo=periodo, dia=dia)) < 1:
+                        grupo = Grupo.objects.filter(grupoemturma__turma=turma)[0]
+                        if len(Turma.objects.filter(professoremturma__professor=professor, dia=dia)) < 1 and len(Turma.objects.filter(disciplinaemturma__disciplina=disciplina, dia=dia)) < 1 and len(Turma.objects.filter(periodoemturma__periodo=periodo, dia=dia)) < 1 and len(Turma.objects.filter(grupoemturma__grupo=grupo, dia=dia)) < 1:
                             turma.dia = dia
                             turma.save()
             return HttpResponseRedirect("../")
