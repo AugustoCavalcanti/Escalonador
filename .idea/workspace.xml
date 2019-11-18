@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7dd2631-a9bd-4c39-9a38-5410cc80ad7c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/escalonador_grafico/web/migrations/0002_auto_20191031_1018.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/escalonador_grafico/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/escalonador_grafico/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escalonador_grafico/escalonador_grafico/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/escalonador_grafico/escalonador_grafico/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/escalonador_grafico/web/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/escalonador_grafico/web/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/escalonador_grafico/web/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/escalonador_grafico/web/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escalonador_grafico/web/migrations/0002_auto_20191030_1040.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/escalonador_grafico/web/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/escalonador_grafico/web/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/escalonador_grafico/web/templates/turma_change_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/escalonador_grafico/web/templates/turma_change_list.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +30,8 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PSO" />
+    <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
@@ -119,7 +122,15 @@
       <workItem from="1570143546558" duration="29000" />
       <workItem from="1570145057500" duration="1323000" />
       <workItem from="1570454552808" duration="1088000" />
-      <workItem from="1572271681979" duration="7433000" />
+      <workItem from="1572271681979" duration="8640000" />
+      <workItem from="1572523210927" duration="10405000" />
+      <workItem from="1572874168989" duration="453000" />
+      <workItem from="1572911032970" duration="23000" />
+      <workItem from="1573130946860" duration="310000" />
+      <workItem from="1573131420929" duration="3177000" />
+      <workItem from="1573586159537" duration="1217000" />
+      <workItem from="1573734414597" duration="4538000" />
+      <workItem from="1573909961505" duration="4456000" />
     </task>
     <servers />
   </component>
@@ -131,7 +142,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

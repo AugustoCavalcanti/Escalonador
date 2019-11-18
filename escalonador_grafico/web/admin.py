@@ -38,18 +38,6 @@ class ProfessorEmTurmaInline(admin.TabularInline):
     raw_id_fields = ('professor',)
 
 
-class DisciplinaEmTurmaInline(admin.TabularInline):
-    model = DisciplinaEmTurma
-    extra = 1
-    raw_id_fields = ('disciplina',)
-
-
-class PeriodoEmTurmaInline(admin.TabularInline):
-    model = PeriodoEmTurma
-    extra = 1
-    raw_id_fields = ('periodo',)
-
-
 class GrupoEmTurmaInline(admin.TabularInline):
     model = GrupoEmTurma
     extra = 1
@@ -58,8 +46,8 @@ class GrupoEmTurmaInline(admin.TabularInline):
 
 @admin.register(Turma)
 class TurmaAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nome', 'dia')
-    inlines = (ProfessorEmTurmaInline, DisciplinaEmTurmaInline, PeriodoEmTurmaInline, GrupoEmTurmaInline)
+    list_display = ('id', 'nome', 'get_professor', 'disciplina', 'periodo', 'dias')
+    inlines = (ProfessorEmTurmaInline, GrupoEmTurmaInline)
     change_list_template = 'turma_change_list.html'
 
     def get_urls(self):
@@ -74,10 +62,18 @@ class TurmaAdmin(admin.ModelAdmin):
             for turma in Turma.objects.all():
                 for professor in Professor.objects.filter(professoremturma__turma=turma):
                     for dia in Dia.objects.filter(diaemprofessor__professor=professor):
-                        disciplina = Disciplina.objects.filter(disciplinaemturma__turma=turma)[0]
-                        periodo = Periodo.objects.filter(periodoemturma__turma=turma)[0]
-                        grupo = Grupo.objects.filter(grupoemturma__turma=turma)[0]
-                        if len(Turma.objects.filter(professoremturma__professor=professor, dia=dia)) < 1 and len(Turma.objects.filter(disciplinaemturma__disciplina=disciplina, dia=dia)) < 1 and len(Turma.objects.filter(periodoemturma__periodo=periodo, dia=dia)) < 1 and len(Turma.objects.filter(grupoemturma__grupo=grupo, dia=dia)) < 1:
-                            turma.dia = dia
+                        grupo = []
+                        for grupo in turma.grupo.all():
+                            for turma_do_grupo in Turma.objects.filter(grupoemturma__grupo=grupo, dias=dia):
+                                grupo.apend(turma_do_grupo)
+                        if len(Turma.objects.filter(professoremturma__professor=professor, dias=dia)) < 1 \
+                                and len(Turma.objects.filter(professoremturma__professor=professor, disciplina=turma.disciplina, dias=dia)) < 1 \
+                                and len(Turma.objects.filter(periodo=turma.periodo, dias=dia)) < 1 and len(grupo) < 1:
+                            mesma_disciplina_professores_diferentes = Turma.objects.filter(disciplina=turma.disciplina)
+                            if len(mesma_disciplina_professores_diferentes) == 1 and mesma_disciplina_professores_diferentes.dias != None:
+                                turma.dias = mesma_disciplina_professores_diferentes.dias
+                            else:
+                                turma.dias = dia
                             turma.save()
             return HttpResponseRedirect("../")
+
