@@ -49,7 +49,7 @@ class GrupoEmTurmaInline(admin.TabularInline):
 
 @admin.register(Turma)
 class TurmaAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nome', 'get_professor', 'disciplina', 'periodo','dias/')
+    list_display = ('id', 'nome', 'get_professor', 'disciplina', 'periodo','dias')
     readonly_fields = ('dias',)
     inlines = (ProfessorEmTurmaInline, GrupoEmTurmaInline)
     change_list_template = 'turma_change_list.html'
